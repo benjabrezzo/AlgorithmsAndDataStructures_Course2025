@@ -163,6 +163,14 @@ public:
         }
         std::cout << "nullptr" << std::endl;
     }
+
+    /**
+     * @return Devuelve el primer elemento de la lista
+     */
+    ListNode<TData>* get_head() const
+    {
+        return head;
+    }
 };
 
 /**
