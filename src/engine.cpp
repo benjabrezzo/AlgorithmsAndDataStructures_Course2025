@@ -122,6 +122,8 @@ void Engine::showMenu()
     std::cout << GREEN << "<> [x] explore  " << RESET << " - Realizar una exploración" << std::endl;
     std::cout << GREEN << "<> [f] fight    " << RESET << " - Enfrentar a un enemigo" << std::endl;
     std::cout << GREEN << "<> [s] save     " << RESET << " - Guardar el progreso" << std::endl;
+    std::cout << GREEN << "<> [v] check    " << RESET << " - Mostrar eventos pendientes" << std::endl;
+    std::cout << GREEN << "<> [h] history  " << RESET << " - Mostrar historial de decisiones del jugador" << std::endl;
     std::cout << GREEN << "<> [q] exit     " << RESET << " - Salir del sistema" << std::endl;
     std::cout << GREEN << "====================================" << RESET << std::endl;
 }
@@ -154,6 +156,11 @@ void Engine::interactiveConsole()
                     std::cout << "Saliendo..." << std::endl;
                     keepRunning = false;
                     break;
+                case Operation::SHOW_EVENTS:
+                    std::cout << "Mostrando eventos..." << std::endl;
+                    std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+                    m_eventos.print();
+
                 default: std::cout << "Operación desconocida" << std::endl; break;
             }
         }

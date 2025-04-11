@@ -5,6 +5,9 @@
 #include "randomEventGenerator.hpp"
 #include "refugio.hpp"
 #include "engineData.hpp"
+#include "queue.hpp"
+#include "stack.hpp"
+#include "eventos.hpp"
 #include <chrono>
 #include <filesystem>
 #include <iostream>
@@ -82,6 +85,7 @@ public:
     const EngineData::PlayerInfo& playerInfo() const;
 
 private:
+
     /**
      * @brief: Inicializa los recursos del tablero
      */
@@ -122,10 +126,24 @@ private:
      */
     void loadConfig();
 
+    /**
+     * @brief Registra un nuevo evento relevante en la Queue.
+     * @param evento
+     */
+    void onNewEvent(const Evento& evento);
+
+    /**
+     * @brief Registra decisiones que toma el jugador en una pila.
+     * @param accion
+     */
+    void registerDecision(const std::string& accion);
+
     EngineData::PlayerInfo m_player;        //< Información del jugador
     RandomEventGenerator m_randomGenerator; //< Generador de eventos aleatorios
     EngineData::GameConfig m_gameConfig;    //< Configuración del juego
     std::unique_ptr<Refugio> m_shelter;     //< Refugio del jugador
+    Queue<Evento> m_eventos;                //< Eventos relevantes del juego
+    Stack<std::string> m_historialDecisiones; //< Pila para registrar las deciciones del jugadorQueue<Evento> m_eventosPendientes; //< Cola para registrar los eventos que ocurren durante el juego
 
     /**
      * @brief: Operaciones que puede realizar el jugador
@@ -139,6 +157,7 @@ private:
         FIGHT,       //< Lucha contra un enemigo
         EXIT,        //< Salir del juego
         SAVE,        //< Guardar el juego
+        HISTORY,     //< Muestra las ultimas decisiones almacenadas en la pila.
         UNKNOWN      //< Operación desconocida
     };
 
@@ -148,7 +167,11 @@ private:
                                                                    {'x', Operation::EXPLORE},
                                                                    {'f', Operation::FIGHT},
                                                                    {'s', Operation::SAVE},
+                                                                   {'v', Operation::CHECK},
+                                                                   {'h', Operation::HISTORY},
                                                                    {'q', Operation::EXIT}};
+
+
 };
 
 #endif // ENGINE_HPP
