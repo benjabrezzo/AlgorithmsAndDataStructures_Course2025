@@ -46,6 +46,32 @@ public:
         return value;
     }
 
+    /**
+     * @brief Consulta el elemento del tope de la pila sin removerlo
+     *
+     * @return TData Valor del tope
+     * @throw std::runtime_error si la pila está vacía
+     */
+    TData top() const
+    {
+        if (is_empty())
+        {
+            throw std::runtime_error("Stack is empty");
+        }
+
+        return list.get_head()->data;
+    }
+
+    /**
+     * @brief Verifica si la pila está vacía
+     *
+     * @return true si está vacía, false en caso contrario
+     */
+    bool is_empty() const
+    {
+        return list.get_head() == nullptr;
+    }
+
 }
 
 #endif // STACK_HPP
