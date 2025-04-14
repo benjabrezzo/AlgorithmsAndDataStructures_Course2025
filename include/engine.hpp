@@ -167,7 +167,7 @@ private:
                                                                    {'x', Operation::EXPLORE},
                                                                    {'f', Operation::FIGHT},
                                                                    {'s', Operation::SAVE},
-                                                                   {'v', Operation::CHECK},
+                                                                   {'v', Operation::CHECK_EVENT},
                                                                    {'h', Operation::HISTORY},
                                                                    {'q', Operation::EXIT}};
 

@@ -34,6 +34,12 @@ public:
      * @brief Muestra la información del ente. Mostrando el nombre y otros atributos
      */
     virtual void showInfo() const = 0;
+
+    /**
+     *
+     * @return nomnbre de la Entidad Generica
+     */
+    [[nodiscard]] std::string getName() const { return m_name; }
 };
 
 #endif // ENTIDADGENERICA_HPP

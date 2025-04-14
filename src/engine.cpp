@@ -160,6 +160,17 @@ void Engine::interactiveConsole()
                     std::cout << "Mostrando eventos..." << std::endl;
                     std::this_thread::sleep_for(std::chrono::milliseconds(2000));
                     m_eventos.print();
+                    break;
+                case Operation::CHECK_EVENT:
+                    std::cout << "Mostrando el evento actual..." << std::endl;
+                    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+                    std::cout<<m_eventos.front()<<std::endl;
+                    break;
+                case Operation::HISTORY:
+                    std::cout << "Mostrando historial de decisiones del jugador..." << std::endl;
+                    std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+                    m_historialDecisiones.print();
+                    break;
 
                 default: std::cout << "Operación desconocida" << std::endl; break;
             }
@@ -397,3 +408,15 @@ visitantsRate=0.10
 
     std::cout << GREEN << "[SUCCESS] Configuración cargada correctamente desde el servidor de VAULT\n" << RESET;
 }
+
+void Engine::onNewEvent(const Evento& evento)
+{
+    m_eventos.enqueue(evento);
+}
+
+void Engine::registerDecision(const std::string& accion)
+{
+    m_historialDecisiones.push(accion);
+}
+
+

@@ -42,6 +42,7 @@ public:
         std::cout << " - Artefactos disponibles:\n";
         for (const auto& item : m_stock)
         {
+            //item->showInfo();
             item->show();
         }
     }
@@ -62,7 +63,9 @@ public:
 
         for (auto it = m_stock.begin(); it != m_stock.end(); ++it)
         {
-            if ((*it)->nombre() == nombre)
+
+            //if ((*it)->nombre() == nombre)
+            if ((*it)->getName() == nombre)
             {
                 std::cout << "💬 " << m_name << " >>> Excelente elección. Espero que lo uses bien." << std::endl;
                 auto item = *it;
