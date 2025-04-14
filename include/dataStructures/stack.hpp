@@ -72,6 +72,13 @@ public:
         return list.get_head() == nullptr;
     }
 
-}
+    /**
+     * @brief Imprime los elementos de la pila
+     */
+    void print() const
+    {
+        list.print();
+    }
+};
 
 #endif // STACK_HPP

@@ -27,6 +27,7 @@ add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
     "${CMAKE_SOURCE_DIR}/assets" "$<TARGET_FILE_DIR:${CMAKE_PROJECT_NAME}>/assets"
 )
+option(ENABLE_TESTS "Compilar las pruebas unitarias" OFF)
 
 if (ENABLE_TESTS)
     # Si ENABLE_TESTS está habilitado, añade el subdirectorio de pruebas
@@ -41,6 +42,9 @@ if (ENABLE_TESTS)
 
     add_executable(unit_tests
         ${UNIT_SRC_DIR}/wrapperVector_test.cpp
+            ${UNIT_SRC_DIR}/list_test.cpp
+            ${UNIT_SRC_DIR}/queue_test.cpp
+            ${UNIT_SRC_DIR}/stack_test.cpp
     )
 
     target_include_directories(unit_tests PRIVATE "${CMAKE_SOURCE_DIR}/include")
