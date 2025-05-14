@@ -18,6 +18,10 @@ void DecisionTree::eliminar(const std::string& decision) {
     eliminarNodo(raiz, decision);
 }
 
+bool DecisionTree::buscar(const std::string& decision) const {
+    return buscar(raiz, decision);
+}
+
 // Metodos privados
 void DecisionTree::insertar(Nodo*& nodo, const std::string& decision) {
     // nodo va a ser la raiz del arbol
@@ -79,3 +83,18 @@ Nodo* DecisionTree::encontrarMinimo(Nodo* nodo) {
     }
     return nodo;
 }
+
+bool DecisionTree::buscar(Nodo* nodo, const std::string& decision) const {
+
+    if(!nodo) {
+        return false;
+    }
+
+    if(nodo->decision == decision) {
+        return true;
+    }
+
+    return buscar(nodo->izquierda, decision) || buscar(nodo->derecha, decision);
+}
+
+
