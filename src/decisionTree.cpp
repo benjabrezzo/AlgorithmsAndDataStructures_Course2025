@@ -22,6 +22,17 @@ bool DecisionTree::buscar(const std::string& decision) const {
     return buscar(raiz, decision);
 }
 
+void DecisionTree::recorrerPreorden() const {
+    recorrerPreorden(raiz);
+}
+
+bool DecisionTree::estaVacio() const {
+    if(!raiz) return true;
+
+    return false;
+}
+
+
 // Metodos privados
 void DecisionTree::insertar(Nodo*& nodo, const std::string& decision) {
     // nodo va a ser la raiz del arbol
@@ -98,3 +109,10 @@ bool DecisionTree::buscar(Nodo* nodo, const std::string& decision) const {
 }
 
 
+void DecisionTree::recorrerPreorden(Nodo* nodo) const {
+    if(!nodo) return;
+
+    std::cout<<nodo->decision<<" ";
+    recorrerPreorden(nodo->izquierda);
+    recorrerPreorden(nodo->derecha);
+}
