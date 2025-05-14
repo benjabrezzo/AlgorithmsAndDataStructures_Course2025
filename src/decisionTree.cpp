@@ -4,6 +4,9 @@ DecisionTree::DecisionTree() {
     raiz = nullptr;
 }
 
+DecisionTree::~DecisionTree() {
+    destruir(raiz);
+}
 
 
 // Metodos publicos
@@ -11,11 +14,9 @@ void DecisionTree::insertar(const std::string& decision) {
     insertar(raiz, decision);
 }
 
-DecisionTree::~DecisionTree() {
-    destruir(raiz);
+void DecisionTree::eliminar(const std::string& decision) {
+    eliminarNodo(raiz, decision);
 }
-
-
 
 // Metodos privados
 void DecisionTree::insertar(Nodo*& nodo, const std::string& decision) {
@@ -35,4 +36,46 @@ void DecisionTree::destruir(Nodo* nodo) {
     destruir(nodo->izquierda);
     destruir(nodo->derecha);
     delete nodo;
+}
+
+void DecisionTree::eliminarNodo(Nodo*& nodo, const std::string& decision) {
+    if(!nodo) return;
+
+    if(decision < nodo->decision) {
+        eliminarNodo(nodo->izquierda, decision);
+    } else if (decision > nodo->decision) {
+        eliminarNodo(nodo->derecha, decision);
+    } else {
+        // Caso 1: El nodo a eliminar NO tiene hijos
+        if(!nodo->izquierda && !nodo->derecha) {
+            delete nodo;
+            nodo = nullptr;
+        }
+
+        // Caso 2: El nodo a eliminar tiene UN SOLO hijo
+        else if(!nodo->izquierda) {
+            Nodo* temp = nodo;
+            nodo = nodo->derecha;
+            delete temp;
+        } else if(!nodo->derecha) {
+            Nodo* temp = nodo;
+            nodo = nodo->izquierda;
+            delete temp;
+        }
+
+        // Caso 3: El nodo a eliminar tiene DOS hijos
+        else {
+            Nodo* sucesor = encontrarMinimo(nodo->derecha);
+            nodo->decision = sucesor->decision;
+            eliminarNodo(nodo->derecha, sucesor->decision);
+        }
+
+    }
+}
+
+Nodo* DecisionTree::encontrarMinimo(Nodo* nodo) {
+    while(nodo && nodo->izquierda) {
+        nodo = nodo->izquierda;
+    }
+    return nodo;
 }

@@ -28,4 +28,5 @@ private:
     void eliminarNodo(Nodo*& nodo, const std::string& decision);
     void recorrerPreorden(Nodo* nodo) const;
     void destruir(Nodo* nodo);
+    Nodo* encontrarMinimo(Nodo* nodo);
 };
