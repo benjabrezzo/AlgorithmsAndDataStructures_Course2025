@@ -13,13 +13,27 @@ AVLTree::~AVLTree() {
 
 
 // Métodos públicos
-void AVLTree::insert(int& outpostId) {
+void AVLTree::insert(int outpostId) {
     // Llamamos al método privado, se le pasa la raiz.
     raiz = insert(raiz, outpostId);
 }
 
+bool AVLTree::contains(int outpostId) {
+    return contains(raiz, outpostId);
+}
+
 
 // Métodos privados
+bool AVLTree::contains(Nodo* raiz, int outpostId) {
+    if(!raiz) return false;
+    
+    if(raiz->outpostId == outpostId) {
+        return true;
+    }
+
+    return contains(raiz->izq, outpostId) || contains(raiz->der, outpostId);
+}
+
 void AVLTree::liberar(Nodo* nodo) {
     if(!nodo) return;
 
@@ -27,7 +41,7 @@ void AVLTree::liberar(Nodo* nodo) {
     liberar(nodo->der);
     delete nodo;
 }
-Nodo* AVLTree::insert(Nodo*& nodo, int& outpostId) {
+Nodo* AVLTree::insert(Nodo*& nodo, int outpostId) {
     // Este if se ejecutará en el caso de que sea el primer nodo a insertar (raiz == null), o en algún llamado de recursión
     // cuando se llega a la posición de un nodo hijo que sea null y que en el se pueda insertar el nuevo nodo.
     if(!nodo) {
