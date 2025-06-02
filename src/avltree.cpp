@@ -5,6 +5,10 @@ AVLTree::AVLTree() {
     raiz = nullptr;
 }
 
+AVLTree::~AVLTree() {
+    liberar(raiz);
+}
+
 // Para implementar el destructor primero se debe implementar un metodo que elimine Nodos del Arbol AVL
 
 
@@ -16,6 +20,13 @@ void AVLTree::insert(int& outpostId) {
 
 
 // Métodos privados
+void AVLTree::liberar(Nodo* nodo) {
+    if(!nodo) return;
+
+    liberar(nodo->izq);
+    liberar(nodo->der);
+    delete nodo;
+}
 Nodo* AVLTree::insert(Nodo*& nodo, int& outpostId) {
     // Este if se ejecutará en el caso de que sea el primer nodo a insertar (raiz == null), o en algún llamado de recursión
     // cuando se llega a la posición de un nodo hijo que sea null y que en el se pueda insertar el nuevo nodo.
