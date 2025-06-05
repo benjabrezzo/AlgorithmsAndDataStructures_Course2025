@@ -23,6 +23,7 @@ class AVLTree {
 
         void insert(int outpostId);
         bool contains(int outpostId);
+        void remove(int outpostId);
 
     private:
         Nodo* raiz; // Cuando se instancia, raiz = nullptr (declarado en el constructor)
@@ -40,6 +41,7 @@ class AVLTree {
         Nodo* insert(Nodo*& nodo, int outpostId);
         void liberar(Nodo* nodo);
         bool contains(Nodo* raiz, int outpostId);
+        void remove(Nodo* raiz, int outpostId);
         
         // Métodos auxiliares
         int max(int n1, int n2) { return n1 > n2 ? n1 : n2; }

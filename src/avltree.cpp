@@ -22,8 +22,30 @@ bool AVLTree::contains(int outpostId) {
     return contains(raiz, outpostId);
 }
 
+void AVLTree::remove(int outpostId) {
+    if(!contains(raiz, outpostId)) {
+        std::cout << "El puesto de avanzada con id " << outpostId << " no se encuetra registrado." << std::endl;
+    } else {
+    	remove(raiz, outpostId);
+    }
+}
+
 
 // Métodos privados
+void AVLTree::remove(Nodo* raiz, int outpostId) {
+    // El chequeo de si la raiz es null ya se hace en contains, por lo tanto no se vendrá a este método sin verificar que el
+    // puesto de avanzada existen en el arbol.
+
+    if(raiz->outpostId < outpostId) {
+        remove(raiz->izq, outpostId);
+    } else if(raiz->outpostId > outpostId) {
+        remove(raiz->der, outpostId);
+    } else {
+    	// El sucesor, o nueva raíz o padre, será el más chico del sub arbol derecho
+
+
+   	}
+}
 bool AVLTree::contains(Nodo* raiz, int outpostId) {
     if(!raiz) return false;
     
